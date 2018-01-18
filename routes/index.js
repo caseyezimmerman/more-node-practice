@@ -17,10 +17,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signupProcess', (req,res,next)=>{
+	console.log(req.session)
 	var name = req.body.name
 	var phone = req.body.phone
 	var email = req.body.email
-	insertQuery = `INSERT INTO user VALUES (2,?,?,?)`
+	insertQuery = `INSERT INTO user VALUES (4,?,?,?)`
 	connection.query(insertQuery,[name,phone,email],(error,results)=>{
 		if(error){
 			throw error
@@ -32,6 +33,7 @@ router.post('/signupProcess', (req,res,next)=>{
 
 router.get('/success', (req,res,next)=>{
 	console.log(req.query)
+	console.log(req.session)
 	var id = req.query.id
 	console.log(id)
 	getQuery = 	`SELECT * FROM user`
@@ -41,7 +43,7 @@ router.get('/success', (req,res,next)=>{
 		}else{
 			res.render('success', { name: results })
 		}
-	console.log(results)
+	// console.log(results)
 	})
 })
 
